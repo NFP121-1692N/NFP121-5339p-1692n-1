@@ -31,8 +31,8 @@ public class Groups extends javax.swing.JFrame {
         sPane = new javax.swing.JScrollPane();
         dataTbl = new javax.swing.JTable();
         tfSearch = new javax.swing.JTextField();
-        lblSearch = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
+        btnContacts = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         btnAddGrp = new javax.swing.JButton();
         btnEditGrp = new javax.swing.JButton();
@@ -44,6 +44,8 @@ public class Groups extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iris");
         setBackground(new java.awt.Color(255, 250, 250));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1000, 600));
 
         upPanel.setBackground(new java.awt.Color(0, 156, 255));
         upPanel.setForeground(new java.awt.Color(255, 250, 250));
@@ -104,11 +106,6 @@ public class Groups extends javax.swing.JFrame {
             }
         });
 
-        lblSearch.setBackground(new java.awt.Color(255, 250, 250));
-        lblSearch.setFont(new java.awt.Font("sansserif", 3, 14)); // NOI18N
-        lblSearch.setForeground(new java.awt.Color(0, 156, 255));
-        lblSearch.setText("Search:");
-
         btnSearch.setBackground(new java.awt.Color(0, 156, 255));
         btnSearch.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(255, 250, 250));
@@ -117,6 +114,17 @@ public class Groups extends javax.swing.JFrame {
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
+            }
+        });
+
+        btnContacts.setBackground(new java.awt.Color(0, 156, 255));
+        btnContacts.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        btnContacts.setForeground(new java.awt.Color(255, 250, 250));
+        btnContacts.setText("Contacts");
+        btnContacts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContacts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContactsActionPerformed(evt);
             }
         });
 
@@ -154,15 +162,15 @@ public class Groups extends javax.swing.JFrame {
         midPanelLayout.setHorizontalGroup(
             midPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midPanelLayout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(lblSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(161, 161, 161)
                 .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 472, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRefresh)
-                .addGap(174, 174, 174))
+                .addGap(53, 53, 53)
+                .addComponent(btnContacts)
+                .addGap(74, 74, 74))
             .addComponent(sPane, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(midPanelLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
@@ -174,7 +182,7 @@ public class Groups extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelGrp))
                     .addComponent(lblContacts))
-                .addGap(90, 1034, Short.MAX_VALUE))
+                .addGap(90, 1058, Short.MAX_VALUE))
         );
         midPanelLayout.setVerticalGroup(
             midPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,10 +190,10 @@ public class Groups extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(midPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSearch)
                     .addComponent(btnSearch)
-                    .addComponent(btnRefresh))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                    .addComponent(btnRefresh)
+                    .addComponent(btnContacts))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(sPane, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblContacts)
@@ -209,7 +217,7 @@ public class Groups extends javax.swing.JFrame {
         credTxt.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
         credTxt.setForeground(new java.awt.Color(255, 250, 250));
         credTxt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        credTxt.setText("Iris. Developed by Bachar Sabra and Charbel El-Khoury.");
+        credTxt.setText("Iris - Developed by Bachar Sabra and Charbel El-Khoury.");
         credTxt.setBorder(null);
         credTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,7 +231,7 @@ public class Groups extends javax.swing.JFrame {
             botPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botPanelLayout.createSequentialGroup()
                 .addGap(402, 402, 402)
-                .addComponent(credTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addComponent(credTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                 .addGap(428, 428, 428))
         );
         botPanelLayout.setVerticalGroup(
@@ -237,6 +245,7 @@ public class Groups extends javax.swing.JFrame {
         getContentPane().add(botPanel, java.awt.BorderLayout.PAGE_END);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
@@ -250,6 +259,10 @@ public class Groups extends javax.swing.JFrame {
     private void credTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_credTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_credTxtActionPerformed
+
+    private void btnContactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnContactsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,6 +302,7 @@ public class Groups extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botPanel;
     private javax.swing.JButton btnAddGrp;
+    private javax.swing.JButton btnContacts;
     private javax.swing.JButton btnDelGrp;
     private javax.swing.JButton btnEditGrp;
     private javax.swing.JButton btnRefresh;
@@ -297,7 +311,6 @@ public class Groups extends javax.swing.JFrame {
     private javax.swing.JTable dataTbl;
     private javax.swing.JLabel lblContacts;
     private javax.swing.JLabel lblGroup;
-    private javax.swing.JLabel lblSearch;
     private javax.swing.JPanel midPanel;
     private javax.swing.JScrollPane sPane;
     private javax.swing.JTextField tfSearch;

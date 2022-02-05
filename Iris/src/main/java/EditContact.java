@@ -7,12 +7,12 @@
  *
  * @author Bachar
  */
-public class AddContact extends javax.swing.JFrame {
+public class EditContact extends javax.swing.JFrame {
 
     /**
      * Creates new form AddContact
      */
-    public AddContact() {
+    public EditContact() {
         initComponents();
     }
 
@@ -40,7 +40,7 @@ public class AddContact extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tfAddress = new javax.swing.JTextArea();
         btnCancel = new javax.swing.JButton();
-        btnAdd = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add Contact");
@@ -116,14 +116,14 @@ public class AddContact extends javax.swing.JFrame {
         btnCancel.setForeground(new java.awt.Color(255, 250, 250));
         btnCancel.setText("Cancel");
         btnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addPanel.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 520, -1, -1));
+        addPanel.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 520, -1, -1));
 
-        btnAdd.setBackground(new java.awt.Color(40, 155, 15));
-        btnAdd.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        btnAdd.setForeground(new java.awt.Color(255, 250, 250));
-        btnAdd.setText("Add");
-        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addPanel.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, -1, -1));
+        btnEdit.setBackground(new java.awt.Color(0, 156, 255));
+        btnEdit.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(255, 250, 250));
+        btnEdit.setText("Edit");
+        btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addPanel.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,8 +183,8 @@ public class AddContact extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addPanel;
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblEMail;
