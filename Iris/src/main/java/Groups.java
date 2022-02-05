@@ -1,6 +1,3 @@
-
-import java.sql.Connection;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -10,12 +7,12 @@ import java.sql.Connection;
  *
  * @author Bachar
  */
-public class Home extends javax.swing.JFrame {
+public class Groups extends javax.swing.JFrame {
 
     /**
-     * Creates new form Home
+     * Creates new form Groups
      */
-    public Home() {
+    public Groups() {
         initComponents();
     }
 
@@ -29,39 +26,33 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         upPanel = new javax.swing.JPanel();
-        lblHome = new javax.swing.JLabel();
+        lblGroup = new javax.swing.JLabel();
         midPanel = new javax.swing.JPanel();
         sPane = new javax.swing.JScrollPane();
         dataTbl = new javax.swing.JTable();
-        btnDeleteGrp = new javax.swing.JButton();
-        btnEditGrp = new javax.swing.JButton();
-        btnAddGrp = new javax.swing.JButton();
         tfSearch = new javax.swing.JTextField();
         lblSearch = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
-        btnAddCon = new javax.swing.JButton();
-        btnEditCon = new javax.swing.JButton();
-        btnDelCon = new javax.swing.JButton();
+        btnAddGrp = new javax.swing.JButton();
+        btnEditGrp = new javax.swing.JButton();
+        btnDelGrp = new javax.swing.JButton();
         lblContacts = new javax.swing.JLabel();
-        lblGroups = new javax.swing.JLabel();
         botPanel = new javax.swing.JPanel();
         credTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iris");
         setBackground(new java.awt.Color(255, 250, 250));
-        setResizable(false);
-        setSize(new java.awt.Dimension(1000, 600));
 
         upPanel.setBackground(new java.awt.Color(0, 156, 255));
         upPanel.setForeground(new java.awt.Color(255, 250, 250));
         upPanel.setPreferredSize(new java.awt.Dimension(1319, 100));
 
-        lblHome.setBackground(new java.awt.Color(0, 156, 255));
-        lblHome.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
-        lblHome.setForeground(new java.awt.Color(255, 250, 250));
-        lblHome.setText("Contacts");
+        lblGroup.setBackground(new java.awt.Color(0, 156, 255));
+        lblGroup.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
+        lblGroup.setForeground(new java.awt.Color(255, 250, 250));
+        lblGroup.setText("Groups");
 
         javax.swing.GroupLayout upPanelLayout = new javax.swing.GroupLayout(upPanel);
         upPanel.setLayout(upPanelLayout);
@@ -69,14 +60,14 @@ public class Home extends javax.swing.JFrame {
             upPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(upPanelLayout.createSequentialGroup()
                 .addGap(570, 570, 570)
-                .addComponent(lblHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(632, 632, 632))
         );
         upPanelLayout.setVerticalGroup(
             upPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(upPanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(lblHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(60, 60, 60))
         );
 
@@ -100,24 +91,6 @@ public class Home extends javax.swing.JFrame {
             }
         ));
         sPane.setViewportView(dataTbl);
-
-        btnDeleteGrp.setBackground(new java.awt.Color(195, 5, 5));
-        btnDeleteGrp.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        btnDeleteGrp.setForeground(new java.awt.Color(255, 250, 250));
-        btnDeleteGrp.setText("Delete");
-        btnDeleteGrp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        btnEditGrp.setBackground(new java.awt.Color(0, 156, 255));
-        btnEditGrp.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        btnEditGrp.setForeground(new java.awt.Color(255, 250, 250));
-        btnEditGrp.setText("Edit");
-        btnEditGrp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        btnAddGrp.setBackground(new java.awt.Color(40, 155, 15));
-        btnAddGrp.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        btnAddGrp.setForeground(new java.awt.Color(255, 250, 250));
-        btnAddGrp.setText("Add");
-        btnAddGrp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         tfSearch.setBackground(new java.awt.Color(248, 248, 255));
         tfSearch.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
@@ -153,33 +126,28 @@ public class Home extends javax.swing.JFrame {
         btnRefresh.setText("Refresh");
         btnRefresh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        btnAddCon.setBackground(new java.awt.Color(40, 155, 15));
-        btnAddCon.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        btnAddCon.setForeground(new java.awt.Color(255, 250, 250));
-        btnAddCon.setText("Add");
-        btnAddCon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddGrp.setBackground(new java.awt.Color(40, 155, 15));
+        btnAddGrp.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnAddGrp.setForeground(new java.awt.Color(255, 250, 250));
+        btnAddGrp.setText("Add");
+        btnAddGrp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        btnEditCon.setBackground(new java.awt.Color(0, 156, 255));
-        btnEditCon.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        btnEditCon.setForeground(new java.awt.Color(255, 250, 250));
-        btnEditCon.setText("Edit");
-        btnEditCon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditGrp.setBackground(new java.awt.Color(0, 156, 255));
+        btnEditGrp.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnEditGrp.setForeground(new java.awt.Color(255, 250, 250));
+        btnEditGrp.setText("Edit");
+        btnEditGrp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        btnDelCon.setBackground(new java.awt.Color(195, 5, 5));
-        btnDelCon.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        btnDelCon.setForeground(new java.awt.Color(255, 250, 250));
-        btnDelCon.setText("Delete");
-        btnDelCon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelGrp.setBackground(new java.awt.Color(195, 5, 5));
+        btnDelGrp.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnDelGrp.setForeground(new java.awt.Color(255, 250, 250));
+        btnDelGrp.setText("Delete");
+        btnDelGrp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         lblContacts.setBackground(new java.awt.Color(255, 250, 250));
         lblContacts.setFont(new java.awt.Font("sansserif", 3, 14)); // NOI18N
         lblContacts.setForeground(new java.awt.Color(0, 156, 255));
-        lblContacts.setText("Contacts:");
-
-        lblGroups.setBackground(new java.awt.Color(255, 250, 250));
-        lblGroups.setFont(new java.awt.Font("sansserif", 3, 14)); // NOI18N
-        lblGroups.setForeground(new java.awt.Color(0, 156, 255));
-        lblGroups.setText("Groups:");
+        lblContacts.setText("Groups:");
 
         javax.swing.GroupLayout midPanelLayout = new javax.swing.GroupLayout(midPanel);
         midPanel.setLayout(midPanelLayout);
@@ -192,7 +160,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 496, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 472, Short.MAX_VALUE)
                 .addComponent(btnRefresh)
                 .addGap(174, 174, 174))
             .addComponent(sPane, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -200,22 +168,13 @@ public class Home extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(midPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(midPanelLayout.createSequentialGroup()
-                        .addComponent(btnAddCon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEditCon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelCon))
-                    .addComponent(lblContacts))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(midPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(midPanelLayout.createSequentialGroup()
                         .addComponent(btnAddGrp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEditGrp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDeleteGrp))
-                    .addComponent(lblGroups))
-                .addGap(90, 90, 90))
+                        .addComponent(btnDelGrp))
+                    .addComponent(lblContacts))
+                .addGap(90, 1034, Short.MAX_VALUE))
         );
         midPanelLayout.setVerticalGroup(
             midPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,20 +185,15 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(lblSearch)
                     .addComponent(btnSearch)
                     .addComponent(btnRefresh))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(sPane, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(midPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblContacts)
-                    .addComponent(lblGroups))
+                .addComponent(lblContacts)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(midPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeleteGrp)
+                    .addComponent(btnDelGrp)
                     .addComponent(btnEditGrp)
-                    .addComponent(btnAddGrp)
-                    .addComponent(btnDelCon)
-                    .addComponent(btnEditCon)
-                    .addComponent(btnAddCon))
+                    .addComponent(btnAddGrp))
                 .addGap(12, 12, 12))
         );
 
@@ -269,7 +223,7 @@ public class Home extends javax.swing.JFrame {
             botPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botPanelLayout.createSequentialGroup()
                 .addGap(402, 402, 402)
-                .addComponent(credTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+                .addComponent(credTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                 .addGap(428, 428, 428))
         );
         botPanelLayout.setVerticalGroup(
@@ -301,13 +255,11 @@ public class Home extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        System.out.println("DEBUG MAIN : INITIATING DB CONNECTION");
-        connection conn;
-        conn = new connection();
-        conn.ConnectDB();
-            System.out.println("DEBUG MAIN : POST INITIATING DB CONNECTION");
-       
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -316,39 +268,35 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Groups.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Groups.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Groups.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Groups.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                new Groups().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botPanel;
-    private javax.swing.JButton btnAddCon;
     private javax.swing.JButton btnAddGrp;
-    private javax.swing.JButton btnDelCon;
-    private javax.swing.JButton btnDeleteGrp;
-    private javax.swing.JButton btnEditCon;
+    private javax.swing.JButton btnDelGrp;
     private javax.swing.JButton btnEditGrp;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JTextField credTxt;
     private javax.swing.JTable dataTbl;
     private javax.swing.JLabel lblContacts;
-    private javax.swing.JLabel lblGroups;
-    private javax.swing.JLabel lblHome;
+    private javax.swing.JLabel lblGroup;
     private javax.swing.JLabel lblSearch;
     private javax.swing.JPanel midPanel;
     private javax.swing.JScrollPane sPane;
