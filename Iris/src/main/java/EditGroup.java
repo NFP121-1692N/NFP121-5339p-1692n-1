@@ -7,12 +7,12 @@
  *
  * @author Bachar
  */
-public class AddContact extends javax.swing.JFrame {
+public class EditGroup extends javax.swing.JFrame {
 
     /**
      * Creates new form AddContact
      */
-    public AddContact() {
+    public EditGroup() {
         initComponents();
     }
 
@@ -31,31 +31,25 @@ public class AddContact extends javax.swing.JFrame {
         lblLName = new javax.swing.JLabel();
         tfLName = new javax.swing.JTextField();
         lblMobile = new javax.swing.JLabel();
-        tfMobile = new javax.swing.JTextField();
-        lblLandline = new javax.swing.JLabel();
-        tfLandline = new javax.swing.JTextField();
-        lblEMail = new javax.swing.JLabel();
-        tfEmail = new javax.swing.JTextField();
-        lblAddress = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tfAddress = new javax.swing.JTextArea();
         btnCancel = new javax.swing.JButton();
-        btnAdd = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add Contact");
+        setTitle("Edit Group");
         setBackground(new java.awt.Color(255, 250, 250));
         setResizable(false);
 
         addPanel.setBackground(new java.awt.Color(255, 250, 250));
-        addPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 156, 255), 2), "Contact Information", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("sansserif", 3, 12), new java.awt.Color(0, 156, 255))); // NOI18N
+        addPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 156, 255), 2), "Group Information", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("sansserif", 3, 12), new java.awt.Color(0, 156, 255))); // NOI18N
         addPanel.setForeground(new java.awt.Color(0, 156, 255));
         addPanel.setFont(new java.awt.Font("sansserif", 3, 14)); // NOI18N
         addPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblFName.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         lblFName.setForeground(new java.awt.Color(0, 156, 255));
-        lblFName.setText("First Name:");
+        lblFName.setText("Name:");
         addPanel.add(lblFName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         tfFName.setBackground(new java.awt.Color(248, 248, 255));
@@ -64,7 +58,7 @@ public class AddContact extends javax.swing.JFrame {
 
         lblLName.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         lblLName.setForeground(new java.awt.Color(0, 156, 255));
-        lblLName.setText("Last Name:");
+        lblLName.setText("Description: (optional)");
         addPanel.add(lblLName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         tfLName.setBackground(new java.awt.Color(248, 248, 255));
@@ -73,43 +67,8 @@ public class AddContact extends javax.swing.JFrame {
 
         lblMobile.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         lblMobile.setForeground(new java.awt.Color(0, 156, 255));
-        lblMobile.setText("Mobile Number:");
+        lblMobile.setText("Members:");
         addPanel.add(lblMobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
-
-        tfMobile.setBackground(new java.awt.Color(248, 248, 255));
-        tfMobile.setForeground(new java.awt.Color(51, 51, 51));
-        addPanel.add(tfMobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 230, -1));
-
-        lblLandline.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        lblLandline.setForeground(new java.awt.Color(0, 156, 255));
-        lblLandline.setText("Landline Number:");
-        addPanel.add(lblLandline, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
-
-        tfLandline.setBackground(new java.awt.Color(248, 248, 255));
-        tfLandline.setForeground(new java.awt.Color(51, 51, 51));
-        addPanel.add(tfLandline, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 230, -1));
-
-        lblEMail.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        lblEMail.setForeground(new java.awt.Color(0, 156, 255));
-        lblEMail.setText("E-Mail:");
-        addPanel.add(lblEMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
-
-        tfEmail.setBackground(new java.awt.Color(248, 248, 255));
-        tfEmail.setForeground(new java.awt.Color(51, 51, 51));
-        addPanel.add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 230, -1));
-
-        lblAddress.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        lblAddress.setForeground(new java.awt.Color(0, 156, 255));
-        lblAddress.setText("Address:");
-        addPanel.add(lblAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
-
-        tfAddress.setBackground(new java.awt.Color(248, 248, 255));
-        tfAddress.setColumns(20);
-        tfAddress.setForeground(new java.awt.Color(51, 51, 51));
-        tfAddress.setRows(5);
-        jScrollPane1.setViewportView(tfAddress);
-
-        addPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
         btnCancel.setBackground(new java.awt.Color(195, 5, 5));
         btnCancel.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
@@ -121,14 +80,30 @@ public class AddContact extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
-        addPanel.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 520, -1, -1));
+        addPanel.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 480, -1, -1));
 
-        btnAdd.setBackground(new java.awt.Color(40, 155, 15));
-        btnAdd.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        btnAdd.setForeground(new java.awt.Color(255, 250, 250));
-        btnAdd.setText("Add");
-        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addPanel.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, -1, -1));
+        btnEdit.setBackground(new java.awt.Color(0, 156, 255));
+        btnEdit.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(255, 250, 250));
+        btnEdit.setText("Edit");
+        btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addPanel.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
+
+        jScrollPane1.setBackground(new java.awt.Color(248, 248, 255));
+        jScrollPane1.setForeground(new java.awt.Color(248, 248, 255));
+
+        jList1.setBackground(new java.awt.Color(248, 248, 255));
+        jList1.setForeground(new java.awt.Color(69, 73, 74));
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 5", "Item 5", "Item 5", "Item 5", "Item 5", "Item 5", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.setSelectionBackground(new java.awt.Color(0, 156, 255));
+        jList1.setSelectionForeground(new java.awt.Color(255, 250, 250));
+        jScrollPane1.setViewportView(jList1);
+
+        addPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 230, 190));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,20 +167,14 @@ public class AddContact extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addPanel;
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblAddress;
-    private javax.swing.JLabel lblEMail;
     private javax.swing.JLabel lblFName;
     private javax.swing.JLabel lblLName;
-    private javax.swing.JLabel lblLandline;
     private javax.swing.JLabel lblMobile;
-    private javax.swing.JTextArea tfAddress;
-    private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfFName;
     private javax.swing.JTextField tfLName;
-    private javax.swing.JTextField tfLandline;
-    private javax.swing.JTextField tfMobile;
     // End of variables declaration//GEN-END:variables
 }

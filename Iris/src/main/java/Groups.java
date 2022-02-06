@@ -139,12 +139,22 @@ public class Groups extends javax.swing.JFrame {
         btnAddGrp.setForeground(new java.awt.Color(255, 250, 250));
         btnAddGrp.setText("Add");
         btnAddGrp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddGrp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddGrpActionPerformed(evt);
+            }
+        });
 
         btnEditGrp.setBackground(new java.awt.Color(0, 156, 255));
         btnEditGrp.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         btnEditGrp.setForeground(new java.awt.Color(255, 250, 250));
         btnEditGrp.setText("Edit");
         btnEditGrp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditGrp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditGrpActionPerformed(evt);
+            }
+        });
 
         btnDelGrp.setBackground(new java.awt.Color(195, 5, 5));
         btnDelGrp.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
@@ -261,8 +271,26 @@ public class Groups extends javax.swing.JFrame {
     }//GEN-LAST:event_credTxtActionPerformed
 
     private void btnContactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactsActionPerformed
-        // TODO add your handling code here:
+        Home contacts = new Home();
+        
+        contacts.setVisible(true);
+        contacts.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        dispose();
     }//GEN-LAST:event_btnContactsActionPerformed
+
+    private void btnAddGrpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddGrpActionPerformed
+        AddGroup addGroup = new AddGroup();
+        
+        addGroup.setVisible(true);
+        addGroup.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_btnAddGrpActionPerformed
+
+    private void btnEditGrpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditGrpActionPerformed
+        EditGroup editGroup = new EditGroup();
+        
+        editGroup.setVisible(true);
+        editGroup.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_btnEditGrpActionPerformed
 
     /**
      * @param args the command line arguments
