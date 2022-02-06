@@ -6,6 +6,7 @@ import java.io.File;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,8 +18,7 @@ import javax.imageio.ImageIO;
  * @author Bachar
  */
 public class Home extends javax.swing.JFrame {
-
-            
+    
     public Home() {
         initComponents();
     }
@@ -51,7 +51,6 @@ public class Home extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iris");
         setBackground(new java.awt.Color(255, 250, 250));
-        setIconImage(Toolkit.getDefaultToolkit().getImage("images/logo.png"));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 600));
 
@@ -170,6 +169,11 @@ public class Home extends javax.swing.JFrame {
         btnGroups.setForeground(new java.awt.Color(255, 250, 250));
         btnGroups.setText("Groups");
         btnGroups.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGroups.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGroupsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout midPanelLayout = new javax.swing.GroupLayout(midPanel);
         midPanel.setLayout(midPanelLayout);
@@ -284,8 +288,19 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddConActionPerformed
 
     private void btnEditConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditConActionPerformed
-        // TODO add your handling code here:
+        EditContact editContact = new EditContact();
+        
+        editContact.setVisible(true);
+        editContact.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btnEditConActionPerformed
+
+    private void btnGroupsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGroupsActionPerformed
+        Groups groups = new Groups();
+        
+        groups.setVisible(true);
+        groups.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        dispose();
+    }//GEN-LAST:event_btnGroupsActionPerformed
 
     /**
      * @param args the command line arguments

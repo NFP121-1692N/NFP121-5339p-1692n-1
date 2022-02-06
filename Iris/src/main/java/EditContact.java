@@ -43,7 +43,7 @@ public class EditContact extends javax.swing.JFrame {
         btnEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add Contact");
+        setTitle("Edit Contact");
         setBackground(new java.awt.Color(255, 250, 250));
         setResizable(false);
 
@@ -116,6 +116,11 @@ public class EditContact extends javax.swing.JFrame {
         btnCancel.setForeground(new java.awt.Color(255, 250, 250));
         btnCancel.setText("Cancel");
         btnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
         addPanel.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 520, -1, -1));
 
         btnEdit.setBackground(new java.awt.Color(0, 156, 255));
@@ -145,6 +150,10 @@ public class EditContact extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
