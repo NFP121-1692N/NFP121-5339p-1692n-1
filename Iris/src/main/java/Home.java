@@ -1,11 +1,9 @@
 
-import java.sql.Connection;
-import javax.swing.JFrame;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.awt.Image;
 import java.awt.Toolkit;
-import javax.imageio.ImageIO;
+//import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.*;
+//import java.sql.Statement;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -291,14 +289,12 @@ public class Home extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        System.out.println("DEBUG MAIN : INITIATING DB CONNECTION");
-        connection conn;
-        conn = new connection();
-        conn.ConnectDB();
-            System.out.println("DEBUG MAIN : POST INITIATING DB CONNECTION");
-       
+        getContacts();
+//        connection dbConn;
+//        dbConn = new connection();
+//        dbConn.ConnectDB();
         try {
+            System.out.println("DEBUG MAIN : 1");
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -306,12 +302,16 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
+            System.out.println("DEBUG MAIN : 1");
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
+            System.out.println("DEBUG MAIN : 2");
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
+            System.out.println("DEBUG MAIN : 3");
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            System.out.println("DEBUG MAIN : 4");
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -323,6 +323,66 @@ public class Home extends javax.swing.JFrame {
             }
         });
     }
+
+
+
+    public static void getContacts() {
+        try {
+    Connection conn = null;
+    Statement stmt = null;
+//            String query = "SELECT * FROM `contacts` WHERE 1;";
+            conn = JDBCCon.getCon();
+            stmt = (Statement) conn.createStatement();
+            ResultSet myRs;
+            myRs = stmt.executeQuery("SELECT * FROM `contacts` WHERE 1");
+            while (myRs.next()) {
+System.out.println("working in main");
+                    System.out.println(myRs.getString("Last_Name") + ", " + myRs.getString("First_Name"));
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("Error in getContacts function : "+ e);
+        }
+
+    }
+
+//        connection dbConn;
+//        dbConn = new connection();
+//        dbConn.ConnectDB();
+//        PreparedStatement pst = null;
+//        ResultSet rs = null;
+//        
+//        try {
+//            Statement statementObj;
+//            pst = dbConn.
+//            rs = pst.executeQuery();
+//
+//            while (rs.next()) {
+//                donorsList.add(new Donor(Integer.parseInt(rs.getObject(1).toString()), rs.getObject(2).toString(),
+//                        rs.getObject(3).toString(), rs.getObject(4).toString(), Integer.parseInt(rs.getObject(5).toString()), rs.getObject(6).toString(),
+//                        rs.getObject(7).toString(), rs.getObject(8).toString(), rs.getObject(9).toString(), rs.getObject(10).toString(), rs.getObject(11).toString()));
+//            }
+//            System.out.println(query);
+//            System.out.println("Data Fetched");
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "Error Occured While Fetching Data!",
+//                    "Error!", JOptionPane.ERROR_MESSAGE);
+//            System.out.println("Database.getDataForTable():" + e);
+        
+//        conn = connection.ConnectDB();
+//        stmt = conn.
+//        try (PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM `contacts` WHERE 1");
+//                ResultSet rs = pstmt.executeQuery()) {
+//            while (rs.next()) {
+//               System.out.println(rs);
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println("sql exception error");
+//        }
+//        return ;
+//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botPanel;
