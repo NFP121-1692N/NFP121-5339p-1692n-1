@@ -1,3 +1,8 @@
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -325,6 +330,47 @@ public class Groups extends javax.swing.JFrame {
                 new Groups().setVisible(true);
             }
         });
+    }
+
+    private void getGroups() {
+        try {
+            Connection conn = null;
+            Statement stmt = null;
+            conn = JDBCCon.getCon();
+            stmt = (Statement) conn.createStatement();
+            ResultSet myRs;
+            myRs = stmt.executeQuery("SELECT * FROM `groups` ;");
+            if (myRs.next() != false) {
+                System.out.println("no groups found");
+            }else{
+                System.out.println("groups");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error in getGroups function : "+ e);
+        }
+
+    }
+
+    private void searchGroups() {
+        String seach = tfSearch.getText();
+        try {
+            Connection conn = null;
+            Statement stmt = null;
+            conn = JDBCCon.getCon();
+            stmt = (Statement) conn.createStatement();
+            ResultSet myRs;
+            myRs = stmt.executeQuery("SELECT * FROM `groups` WHERE Name = '"+seach+"' ;");
+            if (myRs.next() != false) {
+                System.out.println("no groups found");
+            }else{
+                System.out.println("groups ");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error in searchGroups function : "+ e);
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

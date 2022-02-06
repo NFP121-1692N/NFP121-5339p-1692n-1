@@ -1,3 +1,8 @@
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -188,6 +193,28 @@ public class EditContact extends javax.swing.JFrame {
                 new AddContact().setVisible(true);
             }
         });
+    }
+
+    private void updateContact() {
+        String addresse = tfAddress.getText();
+        String email = tfEmail.getText();
+        String fname = tfFName.getText();
+        String lname = tfLName.getText();
+        String landline = tfLandline.getText();
+        String mobile = tfMobile.getText();
+
+        try {
+            Connection conn = null;
+            Statement stmt = null;
+            conn = JDBCCon.getCon();
+            stmt = (Statement) conn.createStatement();
+            ResultSet myRs;
+                stmt.executeQuery("UPDATE `contacts` SET `First_Name`= `\"+fname+\"`,`Last_Name`= `\"+lname+\"`,`Mobile_No`= `\"+mobile+\"`,`Landline_No`= `\"+landline+\"`,`E_Mail`= `\"+email+\"`,`Address`= `\"+adsresse+\"` WHERE ID = 1");
+
+        } catch (Exception e) {
+            System.out.println("Error in editContact function : "+ e);
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -301,7 +301,7 @@ public class Home extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        getContacts();
+//        getContacts();
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -337,7 +337,7 @@ public class Home extends javax.swing.JFrame {
             conn = JDBCCon.getCon();
             stmt = (Statement) conn.createStatement();
             ResultSet myRs;
-            myRs = stmt.executeQuery("SELECT * FROM `contacts` WHERE 1");
+            myRs = stmt.executeQuery("SELECT * FROM `contacts` ;");
             while (myRs.next()) {
             System.out.println("working in main");
             System.out.println(myRs.getString("Last_Name") + ", " + myRs.getString("First_Name"));
@@ -345,6 +345,27 @@ public class Home extends javax.swing.JFrame {
 
         } catch (Exception e) {
             System.out.println("Error in getContacts function : "+ e);
+        }
+    }
+
+
+    private void searchContacts() {
+        String seach = tfSearch.getText();
+        try {
+            Connection conn = null;
+            Statement stmt = null;
+            conn = JDBCCon.getCon();
+            stmt = (Statement) conn.createStatement();
+            ResultSet myRs;
+            myRs = stmt.executeQuery("SELECT * FROM `conatcts` WHERE First_Name = '"+seach+"' OR Last_Name = "+seach+" ;");
+            if (myRs.next() != false) {
+                System.out.println("no groups found");
+            }else{
+                System.out.println("groups ");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error in searchGroups function : "+ e);
         }
 
     }

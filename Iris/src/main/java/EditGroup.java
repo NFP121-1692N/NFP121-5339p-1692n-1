@@ -1,3 +1,8 @@
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -163,6 +168,29 @@ public class EditGroup extends javax.swing.JFrame {
                 new AddContact().setVisible(true);
             }
         });
+    }
+
+    private void editGroup() {
+        String name = tfFName.getText();
+        String description = tfLName.getText();
+
+        try {
+            Connection conn = null;
+            Statement stmt = null;
+            conn = JDBCCon.getCon();
+            stmt = (Statement) conn.createStatement();
+            ResultSet myRs;
+            myRs = stmt.executeQuery("SELECT * FROM `groups` WHERE Name = '"+name+"' ;");
+            if (myRs.next() != false) {
+                stmt.executeQuery("UPDATE `groups` SET `Name`='"+name+"',`Description`= '"+description+"' WHERE ID = ID;");
+            }else{
+                System.out.println("group already exists");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error in editGroup function : "+ e);
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
