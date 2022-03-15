@@ -2,16 +2,9 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
-/**
- *
- * @author Bachar
- */
 public class AddContact extends javax.swing.JFrame {
 
     /**
@@ -133,6 +126,11 @@ public class AddContact extends javax.swing.JFrame {
         btnAdd.setForeground(new java.awt.Color(255, 250, 250));
         btnAdd.setText("Add");
         btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddMouseClicked(evt);
+            }
+        });
         addPanel.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,6 +157,11 @@ public class AddContact extends javax.swing.JFrame {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
+        // TODO add your handling code here:
+        addContact();
+    }//GEN-LAST:event_btnAddMouseClicked
 
     /**
      * @param args the command line arguments
@@ -209,15 +212,16 @@ public class AddContact extends javax.swing.JFrame {
             conn = JDBCCon.getCon();
             stmt = (Statement) conn.createStatement();
             ResultSet myRs;
-            myRs = stmt.executeQuery("SELECT * FROM `contacts` WHERE First_Name = "+fname+" OR Last_Name = "+lname+" OR Mobile_No = "+mobile+";");
-            if (myRs.next() != false) {
-                stmt.executeQuery("INSERT INTO `contacts`(`First_Name`, `Last_Name`, `Mobile_No`, `Landline_No`, `E_Mail`, `Address`) VALUES ('"+fname+"' , '"+lname+"' , '"+mobile+"' , '"+landline+"' , '"+email+"' , '"+addresse+"' )");
-            }else{
-                System.out.println("user already exists");
+            myRs = stmt.executeQuery("SELECT * FROM `contacts` WHERE First_Name = '" + fname + "' OR Last_Name = '" + lname + "' OR Mobile_No = '" + mobile + "';");
+            if (myRs.next() == false) {
+                stmt.executeUpdate("INSERT INTO `contacts`(`First_Name`, `Last_Name`, `Mobile_No`, `Landline_No`, `E_Mail`, `Address`) VALUES ('" + fname + "' , '" + lname + "' , '" + mobile + "' , '" + landline + "' , '" + email + "' , '" + addresse + "' )");
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "user already exists", "Error message", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Exception e) {
-            System.out.println("Error in addContact function : "+ e);
+            System.out.println("Error in addContact function : " + e);
         }
 
     }
