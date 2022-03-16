@@ -161,6 +161,7 @@ public class AddContact extends javax.swing.JFrame {
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
         addContact();
+        dispose();
     }//GEN-LAST:event_btnAddMouseClicked
 
     /**

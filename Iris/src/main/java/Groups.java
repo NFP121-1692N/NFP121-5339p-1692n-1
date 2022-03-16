@@ -271,10 +271,12 @@ public class Groups extends javax.swing.JFrame {
 
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
         // TODO add your handling code here:
+searchGroups();
     }//GEN-LAST:event_tfSearchActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+searchGroups();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void credTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_credTxtActionPerformed
@@ -384,13 +386,26 @@ public class Groups extends javax.swing.JFrame {
             conn = JDBCCon.getCon();
             stmt = (Statement) conn.createStatement();
             ResultSet myRs;
-            myRs = stmt.executeQuery("SELECT * FROM `groups` WHERE Name = '" + seach + "' ;");
-            if (myRs.next() != false) {
-                System.out.println("no groups found");
-            } else {
-                System.out.println("groups ");
+            myRs = stmt.executeQuery("SELECT COUNT(*) AS recordCount FROM `groups`WHERE Name = '" + seach + "' OR Description = '" + seach + "' ;");
+            int count = 1;
+            if (myRs.next()) {
+                count = myRs.getInt("recordCount");
             }
-
+            myRs = stmt.executeQuery("SELECT * FROM `groups` WHERE Name = '" + seach + "' OR Description = '" + seach + "' ;");
+            String columns[] = {"ID", "Name", "Description"};
+            String data[][] = new String[count][3];
+            int i = 0;
+            while (myRs.next()) {
+                int ID = myRs.getInt("ID");
+                String Name = myRs.getString("Name");
+                String Description = myRs.getString("Description");
+                data[i][0] = ID + "";
+                data[i][1] = Name;
+                data[i][2] = Description;
+                i++;
+            }
+            DefaultTableModel model = new DefaultTableModel(data, columns);
+            dataTbl.setModel(model);
         } catch (Exception e) {
             System.out.println("Error in searchGroups function : " + e);
         }

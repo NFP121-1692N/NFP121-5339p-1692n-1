@@ -2,12 +2,12 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Bachar
@@ -92,6 +92,11 @@ public class AddGroup extends javax.swing.JFrame {
         btnAdd.setForeground(new java.awt.Color(255, 250, 250));
         btnAdd.setText("Add");
         btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
         addPanel.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(248, 248, 255));
@@ -134,6 +139,13 @@ public class AddGroup extends javax.swing.JFrame {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        addGroup();
+        dispose();
+
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,15 +192,15 @@ public class AddGroup extends javax.swing.JFrame {
             conn = JDBCCon.getCon();
             stmt = (Statement) conn.createStatement();
             ResultSet myRs;
-            myRs = stmt.executeQuery("SELECT * FROM `groups` WHERE Name = '"+name+"' ;");
-            if (myRs.next() != false) {
-                stmt.executeQuery("INSERT INTO `groups`(`Name`, `Description`) VALUES ('"+name+"' , '"+description+"')");
-            }else{
-                System.out.println("group already exists");
+            myRs = stmt.executeQuery("SELECT * FROM `groups` WHERE Name = '" + name + "' ;");
+            if (myRs.next() == false) {
+                stmt.executeUpdate("INSERT INTO `groups`(`Name`, `Description`) VALUES ('" + name + "' , '" + description + "')");
+            } else {
+                JOptionPane.showMessageDialog(null, "group already exists", "Error message", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Exception e) {
-            System.out.println("Error in addGroup function : "+ e);
+            System.out.println("Error in addGroup function : " + e);
         }
 
     }
