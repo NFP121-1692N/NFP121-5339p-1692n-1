@@ -2,6 +2,7 @@
 //import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -317,7 +318,15 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         String selectedCellValue = (String) dataTbl.getValueAt(dataTbl.getSelectedRow(), 0);
         int value = Integer.parseInt(selectedCellValue);
-        deleteContact(value);
+
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Are You Sure You Want to delete user with Id: " + value + " ?", "User Deletion", dialogButton);
+        if (dialogResult == 0) {
+            deleteContact(value);
+            getContacts();
+        } else {
+            System.out.println("No Option");
+        }
     }//GEN-LAST:event_btnDelConMouseClicked
 
     /**
@@ -437,44 +446,12 @@ public class Home extends javax.swing.JFrame {
     }
 
     private void deleteContact(int contactId) {
-        String seach = tfSearch.getText();
         try {
             Connection conn = null;
             Statement stmt = null;
             conn = JDBCCon.getCon();
             stmt = (Statement) conn.createStatement();
-            ResultSet myRs;
-            int count = 1;
-            myRs = stmt.executeQuery("SELECT COUNT(*) AS recordCount FROM `contacts`  WHERE First_Name = '" + seach + "' OR Last_Name = '" + seach + "' ;");
-
-            if (myRs.next()) {
-                count = myRs.getInt("recordCount");
-            }
-            myRs = stmt.executeQuery("SELECT * FROM `contacts` WHERE First_Name = '" + seach + "' OR Last_Name = '" + seach + "' ;");
-
-            String columns[] = {"ID", "First_Name", "Last_Name", "Mobile_No", "Landline_No", "E_Mail", "Address"};
-            String data[][] = new String[count][7];
-            int i = 0;
-            while (myRs.next()) {
-                int ID = myRs.getInt("ID");
-                String First_Name = myRs.getString("First_Name");
-                String Last_Name = myRs.getString("Last_Name");
-                String Mobile_No = myRs.getString("Mobile_No");
-                String Landline_No = myRs.getString("Landline_No");
-                String E_Mail = myRs.getString("E_Mail");
-                String Address = myRs.getString("Address");
-                data[i][0] = ID + "";
-                data[i][1] = First_Name;
-                data[i][2] = Last_Name;
-                data[i][3] = Mobile_No;
-                data[i][4] = Landline_No;
-                data[i][5] = E_Mail;
-                data[i][6] = Address;
-                i++;
-            }
-            DefaultTableModel model = new DefaultTableModel(data, columns);
-            dataTbl.setModel(model);
-
+            stmt.executeUpdate("DELETE FROM `contacts` WHERE ID = '" + contactId + "';");
         } catch (Exception e) {
             System.out.println("Error in getContacts function : " + e);
         }
