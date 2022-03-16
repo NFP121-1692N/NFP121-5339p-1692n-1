@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -172,6 +173,11 @@ public class Groups extends javax.swing.JFrame {
         btnDelGrp.setForeground(new java.awt.Color(255, 250, 250));
         btnDelGrp.setText("Delete");
         btnDelGrp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelGrp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelGrpActionPerformed(evt);
+            }
+        });
 
         lblContacts.setBackground(new java.awt.Color(255, 250, 250));
         lblContacts.setFont(new java.awt.Font("sansserif", 3, 14)); // NOI18N
@@ -310,6 +316,21 @@ searchGroups();
         getGroups();
     }//GEN-LAST:event_btnRefreshMouseClicked
 
+    private void btnDelGrpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelGrpActionPerformed
+        // TODO add your handling code here:
+        String selectedCellValue = (String) dataTbl.getValueAt(dataTbl.getSelectedRow(), 0);
+        int value = Integer.parseInt(selectedCellValue);
+
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Are You Sure You Want to delete the group with Id: " + value + " ?", "User Deletion", dialogButton);
+        if (dialogResult == 0) {
+            deleteGroup(value);
+            getGroups();
+        } else {
+            System.out.println("No Option");
+        }
+    }//GEN-LAST:event_btnDelGrpActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -410,6 +431,18 @@ searchGroups();
             System.out.println("Error in searchGroups function : " + e);
         }
 
+    }
+
+    private void deleteGroup(int groupId) {
+        try {
+            Connection conn = null;
+            Statement stmt = null;
+            conn = JDBCCon.getCon();
+            stmt = (Statement) conn.createStatement();
+            stmt.executeUpdate("DELETE FROM `groups` WHERE ID = '" + groupId + "';");
+        } catch (Exception e) {
+            System.out.println("Error in getContacts function : " + e);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
