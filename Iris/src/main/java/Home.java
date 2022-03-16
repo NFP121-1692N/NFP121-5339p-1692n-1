@@ -2,18 +2,18 @@
 //import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Bachar
  */
 public class Home extends javax.swing.JFrame {
-    
+
     public Home() {
         initComponents();
     }
@@ -52,6 +52,7 @@ public class Home extends javax.swing.JFrame {
         upPanel.setBackground(new java.awt.Color(0, 156, 255));
         upPanel.setForeground(new java.awt.Color(255, 250, 250));
         upPanel.setPreferredSize(new java.awt.Dimension(1319, 100));
+        getContacts();
 
         lblHome.setBackground(new java.awt.Color(0, 156, 255));
         lblHome.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
@@ -95,6 +96,7 @@ public class Home extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        getContacts();
         sPane.setViewportView(dataTbl);
 
         tfSearch.setBackground(new java.awt.Color(248, 248, 255));
@@ -125,6 +127,11 @@ public class Home extends javax.swing.JFrame {
         btnRefresh.setForeground(new java.awt.Color(255, 250, 250));
         btnRefresh.setText("Refresh");
         btnRefresh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
         btnAddCon.setBackground(new java.awt.Color(40, 155, 15));
         btnAddCon.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
@@ -153,6 +160,11 @@ public class Home extends javax.swing.JFrame {
         btnDelCon.setForeground(new java.awt.Color(255, 250, 250));
         btnDelCon.setText("Delete");
         btnDelCon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelCon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDelConMouseClicked(evt);
+            }
+        });
 
         lblContacts.setBackground(new java.awt.Color(255, 250, 250));
         lblContacts.setFont(new java.awt.Font("sansserif", 3, 14)); // NOI18N
@@ -164,11 +176,6 @@ public class Home extends javax.swing.JFrame {
         btnGroups.setForeground(new java.awt.Color(255, 250, 250));
         btnGroups.setText("Groups");
         btnGroups.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnGroups.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGroupsActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout midPanelLayout = new javax.swing.GroupLayout(midPanel);
         midPanel.setLayout(midPanelLayout);
@@ -195,7 +202,7 @@ public class Home extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelCon))
                     .addComponent(lblContacts))
-                .addGap(90, 1058, Short.MAX_VALUE))
+                .addGap(90, 1125, Short.MAX_VALUE))
         );
         midPanelLayout.setVerticalGroup(
             midPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +213,7 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(btnSearch)
                     .addComponent(btnRefresh)
                     .addComponent(btnGroups))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(sPane, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblContacts)
@@ -246,7 +253,7 @@ public class Home extends javax.swing.JFrame {
             botPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botPanelLayout.createSequentialGroup()
                 .addGap(402, 402, 402)
-                .addComponent(credTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+                .addComponent(credTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
                 .addGap(428, 428, 428))
         );
         botPanelLayout.setVerticalGroup(
@@ -265,10 +272,12 @@ public class Home extends javax.swing.JFrame {
 
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
         // TODO add your handling code here:
+        searchContacts();
     }//GEN-LAST:event_tfSearchActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        searchContacts();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void credTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_credTxtActionPerformed
@@ -277,25 +286,39 @@ public class Home extends javax.swing.JFrame {
 
     private void btnAddConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddConActionPerformed
         AddContact addContact = new AddContact();
-        
+
         addContact.setVisible(true);
         addContact.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btnAddConActionPerformed
 
     private void btnEditConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditConActionPerformed
-        EditContact editContact = new EditContact();
-        
+        String selectedCellValue = (String) dataTbl.getValueAt(dataTbl.getSelectedRow(), 0);
+        int value = Integer.parseInt(selectedCellValue);
+        EditContact editContact = new EditContact(value);
+
         editContact.setVisible(true);
         editContact.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btnEditConActionPerformed
 
     private void btnGroupsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGroupsActionPerformed
         Groups groups = new Groups();
-        
+
         groups.setVisible(true);
         groups.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dispose();
     }//GEN-LAST:event_btnGroupsActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        getContacts();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnDelConMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelConMouseClicked
+        // TODO add your handling code here:
+        String selectedCellValue = (String) dataTbl.getValueAt(dataTbl.getSelectedRow(), 0);
+        int value = Integer.parseInt(selectedCellValue);
+        deleteContact(value);
+    }//GEN-LAST:event_btnDelConMouseClicked
 
     /**
      * @param args the command line arguments
@@ -328,26 +351,46 @@ public class Home extends javax.swing.JFrame {
         });
     }
 
-
-
-    public static void getContacts() {
+    private void getContacts() {
         try {
             Connection conn = null;
             Statement stmt = null;
             conn = JDBCCon.getCon();
             stmt = (Statement) conn.createStatement();
             ResultSet myRs;
-            myRs = stmt.executeQuery("SELECT * FROM `contacts` ;");
-            while (myRs.next()) {
-            System.out.println("working in main");
-            System.out.println(myRs.getString("Last_Name") + ", " + myRs.getString("First_Name"));
+            myRs = stmt.executeQuery("SELECT COUNT(*) AS recordCount FROM `contacts` ;");
+            int count = 1;
+            if (myRs.next()) {
+                count = myRs.getInt("recordCount");
             }
+            myRs = stmt.executeQuery("SELECT *  FROM `contacts` ;");
+            String columns[] = {"ID", "First_Name", "Last_Name", "Mobile_No", "Landline_No", "E_Mail", "Address"};
+            String data[][] = new String[count][7];
+            int i = 0;
+            while (myRs.next()) {
+                int ID = myRs.getInt("ID");
+                String First_Name = myRs.getString("First_Name");
+                String Last_Name = myRs.getString("Last_Name");
+                String Mobile_No = myRs.getString("Mobile_No");
+                String Landline_No = myRs.getString("Landline_No");
+                String E_Mail = myRs.getString("E_Mail");
+                String Address = myRs.getString("Address");
+                data[i][0] = ID + "";
+                data[i][1] = First_Name;
+                data[i][2] = Last_Name;
+                data[i][3] = Mobile_No;
+                data[i][4] = Landline_No;
+                data[i][5] = E_Mail;
+                data[i][6] = Address;
+                i++;
+            }
+            DefaultTableModel model = new DefaultTableModel(data, columns);
+            dataTbl.setModel(model);
 
         } catch (Exception e) {
-            System.out.println("Error in getContacts function : "+ e);
+            System.out.println("Error in getContacts function : " + e);
         }
     }
-
 
     private void searchContacts() {
         String seach = tfSearch.getText();
@@ -357,17 +400,84 @@ public class Home extends javax.swing.JFrame {
             conn = JDBCCon.getCon();
             stmt = (Statement) conn.createStatement();
             ResultSet myRs;
-            myRs = stmt.executeQuery("SELECT * FROM `conatcts` WHERE First_Name = '"+seach+"' OR Last_Name = "+seach+" ;");
-            if (myRs.next() != false) {
-                System.out.println("no groups found");
-            }else{
-                System.out.println("groups ");
+            int count = 1;
+            myRs = stmt.executeQuery("SELECT COUNT(*) AS recordCount FROM `contacts`  WHERE First_Name = '" + seach + "' OR Last_Name = '" + seach + "' ;");
+
+            if (myRs.next()) {
+                count = myRs.getInt("recordCount");
             }
+            myRs = stmt.executeQuery("SELECT * FROM `contacts` WHERE First_Name = '" + seach + "' OR Last_Name = '" + seach + "' ;");
+
+            String columns[] = {"ID", "First_Name", "Last_Name", "Mobile_No", "Landline_No", "E_Mail", "Address"};
+            String data[][] = new String[count][7];
+            int i = 0;
+            while (myRs.next()) {
+                int ID = myRs.getInt("ID");
+                String First_Name = myRs.getString("First_Name");
+                String Last_Name = myRs.getString("Last_Name");
+                String Mobile_No = myRs.getString("Mobile_No");
+                String Landline_No = myRs.getString("Landline_No");
+                String E_Mail = myRs.getString("E_Mail");
+                String Address = myRs.getString("Address");
+                data[i][0] = ID + "";
+                data[i][1] = First_Name;
+                data[i][2] = Last_Name;
+                data[i][3] = Mobile_No;
+                data[i][4] = Landline_No;
+                data[i][5] = E_Mail;
+                data[i][6] = Address;
+                i++;
+            }
+            DefaultTableModel model = new DefaultTableModel(data, columns);
+            dataTbl.setModel(model);
 
         } catch (Exception e) {
-            System.out.println("Error in searchGroups function : "+ e);
+            System.out.println("Error in getContacts function : " + e);
         }
+    }
 
+    private void deleteContact(int contactId) {
+        String seach = tfSearch.getText();
+        try {
+            Connection conn = null;
+            Statement stmt = null;
+            conn = JDBCCon.getCon();
+            stmt = (Statement) conn.createStatement();
+            ResultSet myRs;
+            int count = 1;
+            myRs = stmt.executeQuery("SELECT COUNT(*) AS recordCount FROM `contacts`  WHERE First_Name = '" + seach + "' OR Last_Name = '" + seach + "' ;");
+
+            if (myRs.next()) {
+                count = myRs.getInt("recordCount");
+            }
+            myRs = stmt.executeQuery("SELECT * FROM `contacts` WHERE First_Name = '" + seach + "' OR Last_Name = '" + seach + "' ;");
+
+            String columns[] = {"ID", "First_Name", "Last_Name", "Mobile_No", "Landline_No", "E_Mail", "Address"};
+            String data[][] = new String[count][7];
+            int i = 0;
+            while (myRs.next()) {
+                int ID = myRs.getInt("ID");
+                String First_Name = myRs.getString("First_Name");
+                String Last_Name = myRs.getString("Last_Name");
+                String Mobile_No = myRs.getString("Mobile_No");
+                String Landline_No = myRs.getString("Landline_No");
+                String E_Mail = myRs.getString("E_Mail");
+                String Address = myRs.getString("Address");
+                data[i][0] = ID + "";
+                data[i][1] = First_Name;
+                data[i][2] = Last_Name;
+                data[i][3] = Mobile_No;
+                data[i][4] = Landline_No;
+                data[i][5] = E_Mail;
+                data[i][6] = Address;
+                i++;
+            }
+            DefaultTableModel model = new DefaultTableModel(data, columns);
+            dataTbl.setModel(model);
+
+        } catch (Exception e) {
+            System.out.println("Error in getContacts function : " + e);
+        }
     }
 
 

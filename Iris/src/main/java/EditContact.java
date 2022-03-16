@@ -7,17 +7,19 @@ import java.sql.Statement;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Bachar
  */
 public class EditContact extends javax.swing.JFrame {
 
+    private int selectedUserId = 0;
+
     /**
      * Creates new form AddContact
      */
-    public EditContact() {
+    public EditContact(int selectedCellValue) {
+        this.selectedUserId = selectedCellValue;
         initComponents();
     }
 
@@ -56,6 +58,7 @@ public class EditContact extends javax.swing.JFrame {
         addPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 156, 255), 2), "Contact Information", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("sansserif", 3, 12), new java.awt.Color(0, 156, 255))); // NOI18N
         addPanel.setForeground(new java.awt.Color(0, 156, 255));
         addPanel.setFont(new java.awt.Font("sansserif", 3, 14)); // NOI18N
+        getContactInfo(this.selectedUserId);
         addPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblFName.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
@@ -133,6 +136,11 @@ public class EditContact extends javax.swing.JFrame {
         btnEdit.setForeground(new java.awt.Color(255, 250, 250));
         btnEdit.setText("Edit");
         btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
         addPanel.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,6 +167,12 @@ public class EditContact extends javax.swing.JFrame {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        updateContact();
+        dispose();
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,8 +209,30 @@ public class EditContact extends javax.swing.JFrame {
         });
     }
 
+    private void getContactInfo(int userId) {
+        try {
+            Connection conn = null;
+            Statement stmt = null;
+            conn = JDBCCon.getCon();
+            stmt = (Statement) conn.createStatement();
+            ResultSet myRs;
+            myRs = stmt.executeQuery("SELECT *  FROM `contacts` WHERE ID = '" + userId + "';");
+            int i = 0;
+            while (myRs.next()) {
+                tfAddress.setText(myRs.getString("Address"));
+                tfEmail.setText(myRs.getString("E_Mail"));
+                tfFName.setText(myRs.getString("First_Name"));
+                tfLName.setText(myRs.getString("Last_Name"));
+                tfLandline.setText(myRs.getString("Landline_No"));
+                tfMobile.setText(myRs.getString("Mobile_No"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error in getContactInfo function in edit: " + e);
+        }
+    }
+
     private void updateContact() {
-        String addresse = tfAddress.getText();
+        String address = tfAddress.getText();
         String email = tfEmail.getText();
         String fname = tfFName.getText();
         String lname = tfLName.getText();
@@ -209,10 +245,10 @@ public class EditContact extends javax.swing.JFrame {
             conn = JDBCCon.getCon();
             stmt = (Statement) conn.createStatement();
             ResultSet myRs;
-                stmt.executeQuery("UPDATE `contacts` SET `First_Name`= `\"+fname+\"`,`Last_Name`= `\"+lname+\"`,`Mobile_No`= `\"+mobile+\"`,`Landline_No`= `\"+landline+\"`,`E_Mail`= `\"+email+\"`,`Address`= `\"+adsresse+\"` WHERE ID = 1");
+            stmt.executeUpdate("UPDATE `contacts` SET `First_Name`= '"+fname+"',`Last_Name`= '"+lname+"',`Mobile_No`= '"+mobile+"',`Landline_No`= '"+landline+"',`E_Mail`= '"+email+"',`Address`= '"+address+"' WHERE ID = '"+this.selectedUserId+"'");
 
         } catch (Exception e) {
-            System.out.println("Error in editContact function : "+ e);
+            System.out.println("Error in editContact function : " + e);
         }
 
     }
