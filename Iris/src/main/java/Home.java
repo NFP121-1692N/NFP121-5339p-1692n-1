@@ -177,6 +177,11 @@ public class Home extends javax.swing.JFrame {
         btnGroups.setForeground(new java.awt.Color(255, 250, 250));
         btnGroups.setText("Groups");
         btnGroups.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGroups.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGroupsMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout midPanelLayout = new javax.swing.GroupLayout(midPanel);
         midPanel.setLayout(midPanelLayout);
@@ -328,6 +333,15 @@ public class Home extends javax.swing.JFrame {
             System.out.println("No Option");
         }
     }//GEN-LAST:event_btnDelConMouseClicked
+
+    private void btnGroupsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGroupsMouseClicked
+        // TODO add your handling code here:
+        Groups groups = new Groups();
+
+        groups.setVisible(true);
+        groups.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        dispose();
+    }//GEN-LAST:event_btnGroupsMouseClicked
 
     /**
      * @param args the command line arguments

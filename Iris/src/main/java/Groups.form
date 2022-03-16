@@ -181,6 +181,9 @@
                   </Table>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="getGroups();"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -263,6 +266,9 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRefreshMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAddGrp">
           <Properties>

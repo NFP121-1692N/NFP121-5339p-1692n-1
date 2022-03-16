@@ -2,12 +2,12 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Bachar
@@ -97,6 +97,7 @@ public class Groups extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        getGroups();
         sPane.setViewportView(dataTbl);
 
         tfSearch.setBackground(new java.awt.Color(248, 248, 255));
@@ -138,6 +139,11 @@ public class Groups extends javax.swing.JFrame {
         btnRefresh.setForeground(new java.awt.Color(255, 250, 250));
         btnRefresh.setText("Refresh");
         btnRefresh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRefreshMouseClicked(evt);
+            }
+        });
 
         btnAddGrp.setBackground(new java.awt.Color(40, 155, 15));
         btnAddGrp.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
@@ -277,7 +283,7 @@ public class Groups extends javax.swing.JFrame {
 
     private void btnContactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactsActionPerformed
         Home contacts = new Home();
-        
+
         contacts.setVisible(true);
         contacts.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dispose();
@@ -285,17 +291,22 @@ public class Groups extends javax.swing.JFrame {
 
     private void btnAddGrpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddGrpActionPerformed
         AddGroup addGroup = new AddGroup();
-        
+
         addGroup.setVisible(true);
         addGroup.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btnAddGrpActionPerformed
 
     private void btnEditGrpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditGrpActionPerformed
         EditGroup editGroup = new EditGroup();
-        
+
         editGroup.setVisible(true);
         editGroup.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btnEditGrpActionPerformed
+
+    private void btnRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefreshMouseClicked
+        // TODO add your handling code here:
+        getGroups();
+    }//GEN-LAST:event_btnRefreshMouseClicked
 
     /**
      * @param args the command line arguments
@@ -339,17 +350,30 @@ public class Groups extends javax.swing.JFrame {
             conn = JDBCCon.getCon();
             stmt = (Statement) conn.createStatement();
             ResultSet myRs;
-            myRs = stmt.executeQuery("SELECT * FROM `groups` ;");
-            if (myRs.next() != false) {
-                System.out.println("no groups found");
-            }else{
-                System.out.println("groups");
+            myRs = stmt.executeQuery("SELECT COUNT(*) AS recordCount FROM `groups` ;");
+            int count = 1;
+            if (myRs.next()) {
+                count = myRs.getInt("recordCount");
             }
+            myRs = stmt.executeQuery("SELECT *  FROM `groups` ;");
+            String columns[] = {"ID", "Name", "Description"};
+            String data[][] = new String[count][3];
+            int i = 0;
+            while (myRs.next()) {
+                int ID = myRs.getInt("ID");
+                String Name = myRs.getString("Name");
+                String Description = myRs.getString("Description");
+                data[i][0] = ID + "";
+                data[i][1] = Name;
+                data[i][2] = Description;
+                i++;
+            }
+            DefaultTableModel model = new DefaultTableModel(data, columns);
+            dataTbl.setModel(model);
 
         } catch (Exception e) {
-            System.out.println("Error in getGroups function : "+ e);
+            System.out.println("Error in getGroups function : " + e);
         }
-
     }
 
     private void searchGroups() {
@@ -360,15 +384,15 @@ public class Groups extends javax.swing.JFrame {
             conn = JDBCCon.getCon();
             stmt = (Statement) conn.createStatement();
             ResultSet myRs;
-            myRs = stmt.executeQuery("SELECT * FROM `groups` WHERE Name = '"+seach+"' ;");
+            myRs = stmt.executeQuery("SELECT * FROM `groups` WHERE Name = '" + seach + "' ;");
             if (myRs.next() != false) {
                 System.out.println("no groups found");
-            }else{
+            } else {
                 System.out.println("groups ");
             }
 
         } catch (Exception e) {
-            System.out.println("Error in searchGroups function : "+ e);
+            System.out.println("Error in searchGroups function : " + e);
         }
 
     }
